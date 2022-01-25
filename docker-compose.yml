@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+  database:
+    container_name: classifieds_mysql_container
+    image: mysql:latest
+    restart: always
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: classifieds
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - mysql_database:/var/lib/mysql
+
+  rabbitmq:
+    container_name: classifieds_rabbitmq_container
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  elasticsearch:
+    container_name: classifieds_elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.15.0
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    environment:
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - discovery.type=single-node
+    logging:
+      driver: none
+    ports:
+      - "9300:9300"
+      - "9200:9200"
+
+volumes:
+  mysql_database:
+  esdata:
