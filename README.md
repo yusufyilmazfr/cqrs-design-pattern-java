@@ -3,6 +3,12 @@ This repository contains CQRS implementation in Java. I've written this code-bas
 
 <div align="center">
 
+[🇹🇷 Java ile CQRS Design Pattern | Docker, Elasticsearch, RabbitMQ, Spring, MySQL](https://medium.com/@yusufyilmazfr/java-ile-cqrs-design-pattern-docker-elasticsearch-rabbitmq-spring-mysql-bf2278c8c1c4)
+  
+</div>
+  
+<div align="center">
+
 ![1_n3zJulJ4aZA1_tVCjJ9SBw](https://user-images.githubusercontent.com/43035417/151057004-de91dfe4-2fcf-4573-9928-0ce7600992fe.png)
 
 </div>
