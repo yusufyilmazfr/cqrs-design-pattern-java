@@ -79,3 +79,52 @@ CREATE TABLE `classified` (
   PRIMARY KEY (`id`)
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 ```
+
+## Elasticsearch Index Creating And Mapping
+We need create index on Elasticsearch because of representing database table on it. If you need checking Elasticsearch container status, you may use cURL code that is stay below.
+
+```
+curl -XGET "http://localhost:9200/_cat/health?format=json&pretty"
+```
+
+Create Index with mapping on Elasticsearch: 
+
+```
+curl --location --request PUT 'http://localhost:9200/classifieds' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "settings": {
+        "index": {
+            "number_of_shards": 1,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "id": {
+                "type": "long"
+            },
+            "title": {
+                "type": "text"
+            },
+            "price": {
+                "type": "double"
+            },
+            "detail": {
+                "type": "text"
+            },
+            "categoryId": {
+                "type": "long"
+            }
+        }
+    }
+}'
+```
+
+We will see mapping on Elasticsearch if there is no any error. We may use this cURL code that is below for showing mapping.
+```
+curl -XGET "http://localhost:9200/classifieds/_mapping?pretty&format=json"
+```
+
+It show use created index's mapping.
+
