@@ -8,7 +8,8 @@ This repository contains CQRS implementation in Java. I've written this code-bas
 </div>
 
 
-# Usage and Install
+# Setup
+There are several basic steps below that we need to execute.
 
 ## Docker Compose && Environment
 
@@ -127,4 +128,28 @@ curl -XGET "http://localhost:9200/classifieds/_mapping?pretty&format=json"
 ```
 
 It show use created index's mapping.
+
+## RabbitMQ
+We've bound RabbitMQ port in docker-compose file then we've used default RabbitMQ port, we may need checking RabbitMQ status, we are able to go this link to show RabbitMQ dashboard. http://localhost:15672
+
+# Usages
+
+Sending request to api then creating data on MySQL then sending RabbitMQ event that will update Elasticsearch:
+
+```
+curl --location --request POST 'http://localhost:8080/classifieds' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "title": "Macbook Pro 2019",
+    "detail": "Sahibinden çok temiz Macbook Pro 2019.",
+    "price": 27894,
+    "categoryId": 47
+}'
+```
+
+Reading classified list from Elasticsearch: 
+
+```
+curl --location --request GET 'http://localhost:8080/classifieds'
+```
 
