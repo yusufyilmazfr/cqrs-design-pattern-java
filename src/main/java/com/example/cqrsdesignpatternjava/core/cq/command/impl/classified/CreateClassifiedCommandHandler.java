@@ -44,7 +44,7 @@ public class CreateClassifiedCommandHandler implements CommandHandler<CreateClas
         Classified insertedClassified = this.classifiedRepository.save(classified);
 
         // Send an event.
-        rabbitMqPublisher.publish(CLASSIFIED_INSERTED_QUEUE, objectMapper.writeValueAsString(classified));
+        rabbitMqPublisher.publish(CLASSIFIED_INSERTED_QUEUE, objectMapper.writeValueAsString(insertedClassified));
 
         return new CommandResult(true, "");
     }
